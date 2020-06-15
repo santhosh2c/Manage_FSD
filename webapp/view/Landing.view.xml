@@ -1,0 +1,65 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="FSD.Manage_FSD_Northwind.controller.Landing"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="Title">
+				<content>
+					<Toolbar class="sapUiResponsiveMargin" id="toolbar2">
+						<ToolbarSpacer/>
+						<!--<SearchField-->
+						<!--			id="searchField"-->
+						<!--			width="50%"-->
+						<!--			placeholder="Search for..."-->
+						<!--			enableSuggestions="true"-->
+						<!--			search=".onSearch"-->
+						<!--			suggest=".onSuggest"-->
+						<!--			suggestionItems="{-->
+						<!--				path: '/C_BusinessPartner'-->
+						<!--			}">-->
+						<!--			<SuggestionItem text="{BusinessPartnerGrouping}" description="{BusinessPartnerGrouping_Text}" key="{BusinessPartnerGrouping}" />-->
+						<!--		</SearchField>-->
+						<Input id="productInput" width="50%" type="Text" placeholder="Search..." showSuggestion="true" valueHelpRequest="handleValueHelp"
+							suggestionItemSelected="onSearch" suggestionItems="{ path: '/Employees', parameters : {select:'EmployeeID,LastName'} }">
+							<suggestionItems>
+								<core:ListItem text="{EmployeeID}" additionalText="{LastName}"/>
+							</suggestionItems>
+						</Input>
+						<Button icon="sap-icon://clear-filter" text="clear" id="removebtn" type="Transparent" press="onPressClear"
+							ariaLabelledBy="actionButtonLabel"/>
+						<ToolbarSpacer/>
+						<!--<Button icon="sap-icon://add" id="addbtn" type="Transparent" press="onPressAdd" ariaLabelledBy="actionButtonLabel"/>-->
+						<ToggleButton id="addbtn" icon="sap-icon://add" enabled="true" press="onPressAdd">
+							<layoutData>
+								<FlexItemData growFactor="1"/>
+							</layoutData>
+						</ToggleButton>
+					</Toolbar>
+					<Panel id="addForm" visible="false">
+						<FlexBox alignItems="Start" justifyContent="Center">
+							<items>
+								<f:SimpleForm id="SimpleFormChange" editable="true" layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3" labelSpanM="3"
+									labelSpanS="12" adjustLabelSpan="false" emptySpanXL="4" emptySpanL="4" emptySpanM="4" emptySpanS="0" columnsXL="1" columnsL="1" columnsM="1"
+									singleContainerFullSize="false">
+									<f:content>
+										<Label text="Name"/>
+										<Input id="name" value="{SupplierName}"/>
+										<Label text="Description"/>
+										<Input value="{Street}"></Input>
+										<Button text="save" type="Emphasized"></Button>
+									</f:content>
+								</f:SimpleForm>
+							</items>
+						</FlexBox>
+					</Panel>
+					<List id="idList" headerText="List Items" items="{ path: '/Employees', parameters : {select:'EmployeeID,LastName'} }" growing="true"
+						growingThreshold="20" includeItemInSelection="true">
+						<items>
+							<!--<StandardListItem title="{EmployeeID}" description="{LastName}" type="Navigation" press="onItemPressed"/>-->
+							<StandardListItem title="{LastName}" info="{EmployeeID}" infoState="Information" type="Navigation" press="onItemPressed"/>
+						</items>
+					</List>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
